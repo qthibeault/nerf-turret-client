@@ -56,5 +56,17 @@ class TurretClient:
         resp_bytes = self._sock.recv(1024)
         return msgs.decode(resp_bytes, msgs.StatusMsg)
 
+    def reset(self) -> None:
+        msg = msgs.ResetMsg()
+        msg_bytes = msgs.encode(msg)
+        self._sock.send(msg_bytes)
+
+        resp_bytes = self._sock.recv(1024)
+
+        try:
+            msgs.decode(resp_bytes, msgs.AckMsg)
+        except:
+            warnings.warn("Ack message not recieved after sending shoot command")
+
 
 __all__ = ["TurretClient"]
