@@ -119,6 +119,52 @@ class AddrMsg(Msg):
         return cls(port)
 
 
+class RequestStatusMsg(Msg):
+    def to_dict(self) -> dict[str, object]:
+        return {"type": "statusrequest"}
+
+    @classmethod
+    def from_dict(cls, d: dict[str, object]) -> Self:
+        _check_msg_type(d, "statusrequest")
+        return cls()
+
+
+@dataclass()
+class StatusMsg(Msg):
+    base_angle: float
+    elev_angle: float
+    shots: int
+
+    def to_dict(self) -> dict[str, object]:
+        return {
+            "type": "status",
+            "base_angle": self.base_angle,
+            "elevation_angle": self.elev_angle,
+            "shots": self.shots,
+        }
+
+    @classmethod
+    def from_dict(cls, d: dict[str, object]) -> Self:
+        _check_msg_type(d, "status")
+
+        try:
+            base_angle = d["base_angle"]
+            elev_angle = d["elev_angle"]
+            shots = d["shots"]
+        except KeyError:
+            raise ValueError(
+                "base_angle, elev_angle, or shots property missing from status message"
+            )
+
+        if not isinstance(base_angle, float) or not isinstance(elev_angle, float):
+            raise TypeError("Angles must be given as floats")
+
+        if not isinstance(shots, int):
+            raise TypeError("Shot counter must be an int")
+
+        return cls(base_angle, elev_angle, shots)
+
+
 def encode(msg: Msg) -> bytes:
     return msgpack.packb(msg.to_dict())
 
