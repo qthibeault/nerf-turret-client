@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "nerf-turret-client"
+version = "0.1.0"
+description = "Client for autonomous nerf turret"
+authors = ["Quinn Thibeault <quinn.thibeault96@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "turret_client", from = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+msgpack = "^1.0.5"
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.3.0"
+ruff = "^0.0.263"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
