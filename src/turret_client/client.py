@@ -47,3 +47,6 @@ class TurretClient:
             msgs.decode(resp_bytes, msgs.AckMsg)
         except:
             warnings.warn("Ack message not recieved after sending shoot command")
+
+
+__all__ = ["TurretClient"]
