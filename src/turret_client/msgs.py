@@ -16,11 +16,11 @@ class Msg(Protocol):
 
 def _check_msg_type(msg: dict[str, object], expected: str):
     try:
-        msg_type = d["type"]
+        msg_type = msg["type"]
     except KeyError:
         raise ValueError("No message type provided")
 
-    if msg_type != "move":
+    if msg_type != expected:
         raise ValueError(f"Wrong message type {msg_type}")
 
 
