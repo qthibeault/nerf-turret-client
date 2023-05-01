@@ -165,6 +165,16 @@ class StatusMsg(Msg):
         return cls(base_angle, elev_angle, shots)
 
 
+class ResetMsg(Msg):
+    def to_dict(self) -> dict[str, object]:
+        return {"type": "reset"}
+
+    @classmethod
+    def from_dict(cls, d: dict[str, object]):
+        _check_msg_type(d, "reset")
+        return cls()
+
+
 def encode(msg: Msg) -> bytes:
     return msgpack.packb(msg.to_dict())
 
