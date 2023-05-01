@@ -151,11 +151,11 @@ class StatusMsg(Msg):
 
         try:
             base_angle = d["base_angle"]
-            elev_angle = d["elev_angle"]
+            elev_angle = d["elevation_angle"]
             shots = d["shots"]
         except KeyError:
             raise ValueError(
-                "base_angle, elev_angle, or shots property missing from status message"
+                "base_angle, elevation_angle, or shots property missing from status message"
             )
 
         if not isinstance(base_angle, float) or not isinstance(elev_angle, float):
