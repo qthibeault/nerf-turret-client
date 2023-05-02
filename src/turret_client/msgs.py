@@ -1,10 +1,10 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Protocol, Type, TypeVar
+from typing import Type, TypeVar
 
 import msgpack
-from typing_extensions import Self
+from typing_extensions import Protocol, Self
 
 
 class Msg(Protocol):
