@@ -1,17 +1,19 @@
 from __future__ import annotations
 
+from abc import ABC, abstractmethod, abstractclassmethod
 from dataclasses import dataclass
 from typing import Type, TypeVar
 
 import msgpack
-from typing_extensions import Protocol, Self
+from typing_extensions import Self
 
 
-class Msg(Protocol):
+class Msg(ABC):
+    @abstractmethod
     def to_dict(self) -> dict[str, object]:
         ...
 
-    @classmethod
+    @abstractclassmethod
     def from_dict(cls, d: dict[str, object]) -> Self:
         ...
 
