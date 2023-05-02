@@ -50,8 +50,11 @@ class MoveMsg(Msg):
         except KeyError:
             raise ValueError("Missing base or elevation angle")
 
-        if not isinstance(base_angle, float) or not isinstance(elev_angle, float):
-            raise TypeError("angle values must be floats")
+        if not isinstance(base_angle, float):
+            raise TypeError(f"base angle must be float, not {type(base_angle)}")
+
+        if not isinstance(elev_angle, float):
+            raise TypeError(f"elevation angle must be float, not {type(elev_angle)}")
 
         return cls(base_angle, elev_angle)
 
